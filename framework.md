@@ -15,23 +15,37 @@
 > If you find an SSRF vulnerability, you can use it to read files by accessing an internal-only service, running on localhost on port 6566.
 
 
+## TOOLS
+
+- ysoserial
+- phpgcc
+- hashcat
+- sqlmap
+
 ## I. STAGE
 
 1. XSS
 2. HTTP Request Smuggling
-3. Check SQLi on every f-ing input
-4. Check XSS on every f-ing input
+3. (?) DOM-based
+4. (?) Authentication
+5. (?) Web-Cache poisoning
+6. (?) HTTP Host Header
 
 ## II. STAGE
 
-1. SQL Injection
-2. HTTP Request Smuggling
-3. Check SQLi on every f-ing input
-4. Check XSS on every f-ing input
+1. (?) SQL Injection
+2. (?) CSRF
+3. (?) Insecure Deserialization
+4. (?) OAuth
+5. (?) JWT
+6. (?) BAC
 
 ## III. STAGE
 
-1. XSS
-2. HTTP Request Smuggling
-3. Check SQLi on every f-ing input
-4. Check XSS on every f-ing input
+1. (?) SSRF
+2. (?) Insecure Deserialization
+3. (?) XXE
+4. Command Injection
+5. (?) SSTI
+6. Directory Traversal
+7. (?) File Upload
