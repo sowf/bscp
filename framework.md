@@ -29,7 +29,7 @@
 3. (?) DOM-based
 4. (?) Authentication
 5. (?) Web-Cache poisoning
-6. (?) HTTP Host Header
+6. HTTP Host Header
 
 ## II. STAGE
 
