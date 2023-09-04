@@ -17,10 +17,19 @@
 
 ## TOOLS
 
+Standalone
+
 - ysoserial
 - phpgcc
 - hashcat
 - sqlmap
+
+
+Extensions
+
+- Param Miner
+- HTTP Request Smuggler
+
 
 ## I. STAGE
 
