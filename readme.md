@@ -30,6 +30,7 @@ Standalone
 Extensions
 
 - Param Miner
+- Server-Side Prototype Pollution Scanner
 - HTTP Request Smuggler
 
 
