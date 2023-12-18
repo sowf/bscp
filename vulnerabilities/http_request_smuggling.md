@@ -76,7 +76,7 @@ Transfer-Encoding
 ## HTTP 2.0
 
 `
-When performing some request smuggling attacks, you will want headers from the victim's request to be appended to your smuggled prefix. However, these can interfere with your attack in some cases, resulting in duplicate header errors and suchlike. In the example above, we've mitigated this by including a trailing parameter and a Content-Length header in the smuggled prefix. By using a Content-Length header that is slightly longer than the body, the victim's request will still be appended to your smuggled prefix but will be truncated before the headers.
+!!! When performing some request smuggling attacks, you will want headers from the victim's request to be appended to your smuggled prefix. However, these can interfere with your attack in some cases, resulting in duplicate header errors and suchlike. In the example above, we've mitigated this by including a trailing parameter and a Content-Length header in the smuggled prefix. By using a Content-Length header that is slightly longer than the body, the victim's request will still be appended to your smuggled prefix but will be truncated before the headers.
 `
 
 ### H2.CL
@@ -89,9 +89,9 @@ Content-Length: 0
 
 GET /admin HTTP/1.1
 Host: vulnerable-website.com
-Content-Length: 10
+Content-Length: 5
 
-x=1GET / H
+x=1
 ```
 
 
